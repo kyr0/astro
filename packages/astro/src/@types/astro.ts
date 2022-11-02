@@ -515,7 +515,7 @@ export interface AstroUserConfig {
 	 * @docs
 	 * @name logLevel
 	 * @type {('debug' | 'info' | 'warn' | 'error' | 'silent')}
-	 * @default `'error'`
+	 * @default `'info'`
 	 * @description
 	 *
 	 * Specifies the verbosity of the logging.
@@ -533,7 +533,7 @@ export interface AstroUserConfig {
 	 * import { defineConfig } from 'astro/config';
 	 *
 	 * export default defineConfig({
-	 *   logLevel: 'error'
+	 *   logLevel: 'info'
 	 * })
 	 * ```
 	 */
