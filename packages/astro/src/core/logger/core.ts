@@ -5,12 +5,12 @@ interface LogWritable<T> {
 	write: (chunk: T) => boolean;
 }
 
-export type LoggerLevel = 'debug' | 'info' | 'warn' | 'error' | 'silent'; // same as Pino
-export type LoggerEvent = 'info' | 'warn' | 'error';
+export type LogLevel = 'debug' | 'info' | 'warn' | 'error' | 'silent'; // same as Pino
+export type LogEvent = 'info' | 'warn' | 'error';
 
 export interface LogOptions {
 	dest: LogWritable<LogMessage>;
-	level: LoggerLevel;
+	level: LogLevel;
 }
 
 // Hey, locales are pretty complicated! Be careful modifying this logic...
@@ -30,11 +30,11 @@ export const dateTimeFormat = new Intl.DateTimeFormat([], {
 
 export interface LogMessage {
 	type: string | null;
-	level: LoggerLevel;
+	level: LogLevel;
 	message: string;
 }
 
-export const levels: Record<LoggerLevel, number> = {
+export const levels: Record<LogLevel, number> = {
 	debug: 20,
 	info: 30,
 	warn: 40,
@@ -43,7 +43,7 @@ export const levels: Record<LoggerLevel, number> = {
 };
 
 /** Full logging API */
-export function log(opts: LogOptions, level: LoggerLevel, type: string | null, message: string) {
+export function log(opts: LogOptions, level: LogLevel, type: string | null, message: string) {
 	const logLevel = opts.level;
 	const dest = opts.dest;
 	const event: LogMessage = {
@@ -99,7 +99,7 @@ function padStr(str: string, len: number) {
 	return str + spaces;
 }
 
-export let defaultLogLevel: LoggerLevel;
+export let defaultLogLevel: LogLevel;
 if (typeof process !== 'undefined') {
 	if (process.argv.includes('--verbose')) {
 		defaultLogLevel = 'debug';

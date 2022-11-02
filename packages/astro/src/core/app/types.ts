@@ -5,6 +5,7 @@ import type {
 	SerializedRouteData,
 	SSRLoadedRenderer,
 } from '../../@types/astro';
+import type { LogLevel } from '../logger/core';
 
 export type ComponentPath = string;
 
@@ -34,6 +35,7 @@ export interface SSRManifest {
 	renderers: SSRLoadedRenderer[];
 	entryModules: Record<string, string>;
 	assets: Set<string>;
+	logLevel?: LogLevel;
 }
 
 export type SerializedSSRManifest = Omit<SSRManifest, 'routes' | 'assets'> & {

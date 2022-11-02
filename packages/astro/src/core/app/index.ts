@@ -54,7 +54,10 @@ export class App {
 		this.#routeDataToRouteInfo = new Map(manifest.routes.map((route) => [route.routeData, route]));
 		this.#env = createEnvironment({
 			adapterName: manifest.adapterName,
-			logging: this.#logging,
+			logging: {
+				dest: this.#logging.dest,
+				level: manifest.logLevel ?? this.#logging.level,
+			},
 			markdown: manifest.markdown,
 			mode: 'production',
 			renderers: manifest.renderers,

@@ -16,6 +16,9 @@ export default async function preview(
 	_settings: AstroSettings,
 	{ logging }: PreviewOptions
 ): Promise<PreviewServer> {
+	// allow the user to override the logLevel
+	logging.level = _settings.config.logLevel ?? logging.level;
+
 	const settings = await runHookConfigSetup({
 		settings: _settings,
 		command: 'preview',

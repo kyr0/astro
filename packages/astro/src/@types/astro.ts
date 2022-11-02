@@ -16,6 +16,7 @@ import type { SerializedSSRManifest } from '../core/app/types';
 import type { PageBuildData } from '../core/build/types';
 import type { AstroConfigSchema } from '../core/config';
 import type { AstroCookies } from '../core/cookies';
+import type { LogLevel } from '../core/logger/core';
 import type { AstroComponentFactory } from '../runtime/server';
 import { SUPPORTED_MARKDOWN_FILE_EXTENSIONS } from './../core/constants.js';
 export type {
@@ -509,6 +510,34 @@ export interface AstroUserConfig {
 	 * ```
 	 */
 	output?: 'static' | 'server';
+
+	/**
+	 * @docs
+	 * @name logLevel
+	 * @type {('debug' | 'info' | 'warn' | 'error' | 'silent')}
+	 * @default `'error'`
+	 * @description
+	 *
+	 * Specifies the verbosity of the logging.
+	 *
+	 * - 'debug' - Same as 'info' plus additional debug output is logged
+	 * - 'info' - All standard messages are logged, together with warnings and errors
+	 * - 'warn' - Only warnings and errors are logged
+	 * - 'error' - Only errors are logged
+	 * - 'silent' - All logging is disabled
+	 *
+	 * If the argument --verbose is used, this setting will be overridden to 'debug'
+	 * If the argument --silent is used, this setting will be overridden by 'silent'
+	 *
+	 * ```js
+	 * import { defineConfig } from 'astro/config';
+	 *
+	 * export default defineConfig({
+	 *   logLevel: 'error'
+	 * })
+	 * ```
+	 */
+	logLevel?: LogLevel;
 
 	/**
 	 * @docs

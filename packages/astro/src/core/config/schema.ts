@@ -87,6 +87,16 @@ export const AstroConfigSchema = z.object({
 		.union([z.literal('static'), z.literal('server')])
 		.optional()
 		.default('static'),
+	logLevel: z
+		.union([
+			z.literal('debug'),
+			z.literal('info'),
+			z.literal('warn'),
+			z.literal('error'),
+			z.literal('silent'),
+		])
+		.optional()
+		.default('info'),
 	adapter: z.object({ name: z.string(), hooks: z.object({}).passthrough().default({}) }).optional(),
 	integrations: z.preprocess(
 		// preprocess

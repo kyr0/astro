@@ -4,6 +4,7 @@ import * as readline from 'readline';
 import { Writable } from 'stream';
 import stringWidth from 'string-width';
 import { dateTimeFormat, error, info, warn } from './core.js';
+import type { LogLevel } from './core';
 
 type ConsoleStream = Writable & {
 	fd: 1 | 2;
@@ -73,12 +74,9 @@ interface LogWritable<T> {
 	write: (chunk: T) => boolean;
 }
 
-export type LoggerLevel = 'debug' | 'info' | 'warn' | 'error' | 'silent'; // same as Pino
-export type LoggerEvent = 'info' | 'warn' | 'error';
-
 export interface LogOptions {
 	dest?: LogWritable<LogMessage>;
-	level?: LoggerLevel;
+	level?: LogLevel;
 }
 
 export const nodeLogOptions: Required<LogOptions> = {
@@ -88,11 +86,11 @@ export const nodeLogOptions: Required<LogOptions> = {
 
 export interface LogMessage {
 	type: string | null;
-	level: LoggerLevel;
+	level: LogLevel;
 	message: string;
 }
 
-export const levels: Record<LoggerLevel, number> = {
+export const levels: Record<LogLevel, number> = {
 	debug: 20,
 	info: 30,
 	warn: 40,

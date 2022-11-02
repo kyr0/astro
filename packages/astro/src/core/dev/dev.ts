@@ -26,6 +26,10 @@ export default async function dev(
 	options: DevOptions
 ): Promise<DevServer> {
 	const devStart = performance.now();
+
+	// allow the user to override the logLevel
+	options.logging.level = settings.config.logLevel ?? options.logging.level;
+
 	await options.telemetry.record([]);
 
 	// Create a container which sets up the Vite server.

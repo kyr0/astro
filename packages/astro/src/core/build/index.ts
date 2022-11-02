@@ -50,6 +50,10 @@ class AstroBuilder {
 		}
 		this.settings = settings;
 		this.logging = options.logging;
+
+		// allow the user to override the logLevel
+		options.logging.level = settings.config.logLevel ?? options.logging.level;
+
 		this.routeCache = new RouteCache(this.logging);
 		this.origin = settings.config.site
 			? new URL(settings.config.site).origin
